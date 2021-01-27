@@ -11,7 +11,9 @@
   </div>
   <div *ngFor="let trip of selectedTrips; let i=index">
     <h2>{{searchResponse.tripsWithDictionary[i].trips[0].origin.name | titlecase}}
-      <i class="fas fa-angle-right"></i>
+      <span class="material-icons">
+        keyboard_arrow_right
+      </span>
       {{searchResponse.tripsWithDictionary[i].trips[0].destination.name | titlecase}}
     </h2>
     <h4 class="trip-price"
@@ -33,7 +35,6 @@
           {{ getPassengerPrice(i, passengerIndex) | currency:"EUR":"symbol"}}
         </p>
       </div>
-      <!-- <hr *ngIf="selectionModels[tripIndex].vehicles.length > 0"> -->
       <div>
         <p class="ready-for-info" *ngFor="let vehicle of selectedTrips[i].vehicles; let vehicleIndex = index">
           <strong>Vehicle {{vehicleIndex+1}} : </strong>

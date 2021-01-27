@@ -26,6 +26,10 @@
   margin-top: 30px;
 }
 
+.home-header {
+  padding-bottom: 6rem;
+}
+
 header {
   /* height: 60vh; */
   background: lightgrey;
