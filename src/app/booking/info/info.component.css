@@ -6,14 +6,6 @@
   display: none;
 }
 
-/* ::ng-deep .nationInfo .mat-form-field-wrapper {
-  height: 50px;
-}
-
-::ng-deep .nationInfo .mat-form-field-flex {
-  align-items: normal;
-} */
-
 
 .validation {
   border-color: red;
@@ -52,7 +44,7 @@
   margin-bottom: 1rem;
 }
 
-@media(max-width: 425px) {
+@media(max-width: 540px) {
   .contacts {
     margin-right: 15px;
   }

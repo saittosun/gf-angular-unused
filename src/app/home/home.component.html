@@ -1,16 +1,24 @@
 <header class="pt-5">
-  <div class="row">
+  <div class="row search-ferry">
     <div class="col">
-      <div class="mx-auto p-3 text-white text-center">
-        <div class="btn-group btn-group-toggle d-flex d-inline-flex p-2">
-          <label class="btn btn-secondary btn-lg" [ngClass]="{ active: searchMode }">
-            <input type="radio" [disabled]="searchMode" (click)="toggleSearchMode()" />
+      <div class="text-white text-center">
+        <div class="btn-group btn-block" role="group">
+          <button 
+            type="button"
+            class="btn btn-secondary" 
+            [ngClass]="{ active: searchMode }" 
+            [disabled]="searchMode" 
+            (click)="toggleSearchMode()">
             Search Ferry
-          </label>
-          <label class="btn btn-secondary btn-lg radioButtons" [ngClass]="{ active: !searchMode }">
-            <input type="radio" [disabled]="!searchMode" (click)="toggleSearchMode()"/>
+          </button>
+          <button 
+            type="button"
+            class="btn btn-secondary" 
+            [ngClass]="{ active: !searchMode }" 
+            [disabled]="!searchMode" 
+            (click)="toggleSearchMode()">
             Search Booking
-          </label>
+          </button>        
         </div>
       </div>
     </div>
