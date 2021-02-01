@@ -11,7 +11,7 @@
   </div>
   <div *ngFor="let trip of selectedTrips; let i=index">
     <h2>{{searchResponse.tripsWithDictionary[i].trips[0].origin.name | titlecase}}
-      <span class="material-icons">
+      <span class="material-icons" style="vertical-align: text-top;">
         keyboard_arrow_right
       </span>
       {{searchResponse.tripsWithDictionary[i].trips[0].destination.name | titlecase}}

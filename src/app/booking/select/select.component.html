@@ -12,14 +12,16 @@
             {{
               searchResponse.tripsWithDictionary[dicIndex].trips[0].origin.name | titlecase
             }}
-            <!-- <i class="fas fa-angle-double-right d-none d-sm-none d-md-block"></i> -->
+            <!-- <span class="material-icons">
+              keyboard_arrow_right
+            </span> -->
             {{
               searchResponse.tripsWithDictionary[dicIndex].trips[0].destination.name | titlecase
             }}
           </div>
           <div class="col-9 col-md-9 route-alternative-dates">
             <div class="row">
-              <div class="col-4 col-lg-4 col-md-4">
+              <div class="col-4 col-lg-4 col-md-4 dates">
                 <button class="btn btn-light btn-block date-update-before" *ngIf="routeDateAlternatives[dicIndex].previousDate" (click)="handleNewDateSearch(dicIndex, false)">
                   {{ routeDateAlternatives[dicIndex].previousDate | date: "d MMM" }}
                 </button>
@@ -54,12 +56,12 @@
 
         <div [hidden]="isDictionaryVisiable[dicIndex]">
           <div *ngFor="let _trip of dictionary.trips; let tripIndex = index">
-            <div class="font-weight-bold mb-1 dictionary-trips" [ngClass]="isTripSelected(dicIndex, tripIndex) ? 'steelblue' : 'bg-light'"
+            <div class="font-weight-bold dictionary-trips" [ngClass]="isTripSelected(dicIndex, tripIndex) ? 'steelblue' : 'bg-light'"
                  (click)="toggleTrip(dicIndex, tripIndex)">
-              <div class="row text-center align-items-center mb-1 dictionary">
+              <div class="row text-center align-items-center dictionary">
                 <div class="col-3 col-md-3 col-lg-3">
                   <div class="row align-items-center">
-                    <div class="col-3 col-md-5">
+                    <div class="col-3 col-md-5 logo-name">
                       <img
                       class="logo"
                         [src]="
@@ -80,12 +82,12 @@
                 </div>
                 <div class="col-4 col-md-3 col-lg-4">
                   <div class="row">
-                    <div class="col-9 col-md-8 col-lg-9 trip-time">
+                    <div class="col-9 col-md-8 col-lg-9 align-self-center trip-time">
                       {{
                         searchResponse.tripsWithDictionary[dicIndex].trips[tripIndex]
                           .departureDateTime | date: "shortTime"
                       }}
-                      <span class="material-icons">
+                      <span class="material-icons trip-keyboard-arrow">
                         keyboard_arrow_right
                       </span>
                       {{
@@ -93,34 +95,34 @@
                           .arrivalDateTime | date: "shortTime"
                       }}
                     </div>
-                    <div class="col-3 col-md-4 col-lg-3 align-self-center trip-time-duration">
+                    <div class="col-3 col-md-4 col-lg-3 trip-time-duration">
                       {{ getDurationTime(dicIndex, tripIndex) }}
                     </div>
                   </div>
                 </div>
                 <div class="col-3 col-md-3 col-lg-2 icon-buttons">
                   <div class="row">
-                    <div class="col-4 col-md-3">
-                      <span class="material-icons" *ngIf="!hasAccommodation(dicIndex, tripIndex)">
+                    <div class="col-4 col-md-3 icon-groups">
+                      <span class="material-icons" type="button" *ngIf="!hasAccommodation(dicIndex, tripIndex)">
                         cancel
                       </span> 
-                      <span class="material-icons seat">
+                      <span class="material-icons seat" type="button">
                         airline_seat_recline_extra
                       </span>
                     </div>
                     <div class="col-4 col-md-3 bed">
-                      <span class="material-icons">
+                      <span class="material-icons airline" type="button">
                         airline_seat_individual_suite
                       </span>  
-                      <span class="material-icons" *ngIf="!hasVesselCabin(dicIndex, tripIndex)">
+                      <span class="material-icons" type="button" *ngIf="!hasVesselCabin(dicIndex, tripIndex)">
                         cancel
                       </span>       
                     </div>
                     <div class="col-4 col-md-3 car">
-                      <span class="material-icons">
+                      <span class="material-icons car-material" type="button">
                         time_to_leave
                       </span>
-                      <span class="material-icons" *ngIf="!hasVesselGarage(dicIndex, tripIndex)">
+                      <span class="material-icons" type="button" *ngIf="!hasVesselGarage(dicIndex, tripIndex)">
                         cancel
                       </span>
                     </div>
@@ -134,17 +136,17 @@
                   }}
                 </div>
                 <div class="col-1 col-md-1 col-lg-1 select-dictionary">
-                  <span class="material-icons select-dictionary-plus-icon" *ngIf="isTripVisible[dicIndex][tripIndex]" type="button">
+                  <span class="material-icons select-dictionary-check-icon" *ngIf="isTripVisible[dicIndex][tripIndex]" type="button">
                     check_box
                   </span>
-                  <span class="material-icons" *ngIf="!isTripVisible[dicIndex][tripIndex]" type="button">
+                  <span class="material-icons select-dictionary-plus-icon" *ngIf="!isTripVisible[dicIndex][tripIndex]" type="button">
                     control_point
-                    </span>
+                  </span>
                 </div>
               </div>
             </div>
 
-            <div [hidden]="!isTripVisible[dicIndex][tripIndex]">
+            <div [hidden]="!isTripVisible[dicIndex][tripIndex]" style="margin-top: 10px;">
               <app-passenger-select
                 [dicIndex]="dicIndex"
                 [tripIndex]="tripIndex"
@@ -183,7 +185,7 @@
                   type="button"
                   class="mr-2 btn btn-secondary passenger-add"
                   (click)="addPassenger(1)">
-                  <span class="material-icons">
+                  <span class="material-icons material-person">
                     person_add_alt_1
                   </span>
                 </button>
@@ -192,33 +194,35 @@
                   type="button"
                   class="btn btn-dark passenger-minus"
                   (click)="addPassenger(-1)">
-                  <span class="material-icons">
+                  <span class="material-icons material-person">
                     person_remove_alt_1
                   </span>
                 </button>
-                <span class="material-icons">
+                <span class="material-icons grip-line">
                   swap_vert
                 </span>
                 <button
                   type="button"
+                  class="car-buttons"
                   class="mx-2 btn btn-secondary vehicle-add"
                   (click)="addVehicle(1)">
-                  <span class="material-icons">
+                  <span class="material-icons material-car">
                     directions_car
                   </span>
-                  <span class="material-icons">
+                  <span class="material-icons material-car-circle">
                     add_circle_outline
                   </span>
                 </button>
                 <span class="badge badge-light mr-2 counter">{{ vehicleCount }}</span>
                 <button
                   type="button"
+                  class="car-buttons"
                   class="btn btn-dark vehicle-minus"
                   (click)="addVehicle(-1)">
-                  <span class="material-icons">
+                  <span class="material-icons material-car">
                     directions_car
                   </span>
-                  <span class="material-icons">
+                  <span class="material-icons material-car-circle">
                     remove_circle_outline
                   </span>
                 </button>
@@ -237,7 +241,7 @@
                   type="button"
                   (click)="select(dicIndex, tripIndex)">
                   Select
-                  <span class="material-icons">
+                  <span class="material-icons thump">
                     thumb_up
                   </span>
                 </button>
